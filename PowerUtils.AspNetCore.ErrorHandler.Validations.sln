@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32228.430
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.project", "1.project", "{490ED8DE-01D5-410E-9325-4C04A9AB5346}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		CHANGELOG.md = CHANGELOG.md
+		global.json = global.json
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.cicd", "2.cicd", "{F99AA35E-FBA7-45EA-BFC2-589F6B90832F}"
+	ProjectSection(SolutionItems) = preProject
+		.github\dependabot.yml = .github\dependabot.yml
+		.github\workflows\publish-nuget.yml = .github\workflows\publish-nuget.yml
+		.github\workflows\sonarcloud.yml = .github\workflows\sonarcloud.yml
+		.github\workflows\test-project.yml = .github\workflows\test-project.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.src", "3.src", "{A47BE396-520C-4707-809B-45F8D748925D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.tests", "5.tests", "{8C593D27-A25A-4B0B-A42E-FB5DA7A8B8DE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerUtils.AspNetCore.ErrorHandler.Validations", "src\PowerUtils.AspNetCore.ErrorHandler.Validations.csproj", "{B34358F9-CE30-4469-A54F-0E6487200F18}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerUtils.AspNetCore.ErrorHandler.Validations.Tests", "tests\PowerUtils.AspNetCore.ErrorHandler.Validations.Tests\PowerUtils.AspNetCore.ErrorHandler.Validations.Tests.csproj", "{B8BF7A8F-66A0-4390-AA93-22C63A3FDE2E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.samples", "4.samples", "{4ABBB44B-AB79-470E-9DD2-7AE353BE5CBA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerUtils.AspNetCore.ErrorHandler.Validations.Samples", "samples\PowerUtils.AspNetCore.ErrorHandler.Validations.Samples\PowerUtils.AspNetCore.ErrorHandler.Validations.Samples.csproj", "{84678B79-19B6-4C61-B90B-313097DACAE3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B34358F9-CE30-4469-A54F-0E6487200F18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B34358F9-CE30-4469-A54F-0E6487200F18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B34358F9-CE30-4469-A54F-0E6487200F18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B34358F9-CE30-4469-A54F-0E6487200F18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8BF7A8F-66A0-4390-AA93-22C63A3FDE2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8BF7A8F-66A0-4390-AA93-22C63A3FDE2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8BF7A8F-66A0-4390-AA93-22C63A3FDE2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8BF7A8F-66A0-4390-AA93-22C63A3FDE2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84678B79-19B6-4C61-B90B-313097DACAE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84678B79-19B6-4C61-B90B-313097DACAE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84678B79-19B6-4C61-B90B-313097DACAE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84678B79-19B6-4C61-B90B-313097DACAE3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B34358F9-CE30-4469-A54F-0E6487200F18} = {A47BE396-520C-4707-809B-45F8D748925D}
+		{B8BF7A8F-66A0-4390-AA93-22C63A3FDE2E} = {8C593D27-A25A-4B0B-A42E-FB5DA7A8B8DE}
+		{84678B79-19B6-4C61-B90B-313097DACAE3} = {4ABBB44B-AB79-470E-9DD2-7AE353BE5CBA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E54D9456-2472-4B90-8419-400E31C73874}
+	EndGlobalSection
+EndGlobal
