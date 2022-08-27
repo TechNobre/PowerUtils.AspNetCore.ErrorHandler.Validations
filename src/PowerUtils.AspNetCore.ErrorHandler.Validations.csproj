@@ -80,7 +80,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="PowerUtils.AspNetCore.ErrorHandler" Version="1.1.1" />
-    <PackageReference Include="PowerUtils.Validations" Version="3.0.0" />
+    <PackageReference Include="PowerUtils.Validations" Version="3.1.0" />
   </ItemGroup>
 
 
