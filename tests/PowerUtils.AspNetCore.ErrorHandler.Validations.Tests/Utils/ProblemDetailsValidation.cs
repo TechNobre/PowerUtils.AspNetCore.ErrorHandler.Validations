@@ -4,16 +4,15 @@ using System.Net.Http;
 using System.Net.Mime;
 using FluentAssertions;
 using Microsoft.AspNetCore.WebUtilities;
-using PowerUtils.Net.Constants;
 
 namespace PowerUtils.AspNetCore.ErrorHandler.Validations.Tests.Utils
 {
     public static class ProblemDetailsValidation
     {
-        public static void ValidateContent(this ProblemDetailsResponse problemDetails, HttpStatusCode statusCode)
+        public static void ValidateContent(this ErrorProblemDetails problemDetails, HttpStatusCode statusCode)
             => problemDetails.ValidateContent(statusCode, null);
 
-        public static void ValidateContent(this ProblemDetailsResponse problemDetails, HttpStatusCode statusCode, string instance)
+        public static void ValidateContent(this ErrorProblemDetails problemDetails, HttpStatusCode statusCode, string instance)
         {
             var code = (int)statusCode;
 
@@ -21,7 +20,7 @@ namespace PowerUtils.AspNetCore.ErrorHandler.Validations.Tests.Utils
                 .Be(code);
 
             problemDetails.Type.Should()
-                .Be(code.GetStatusCodeLink());
+                .NotBeNullOrWhiteSpace();
 
             problemDetails.Title.Should()
                 .Be(ReasonPhrases.GetReasonPhrase(code));
@@ -29,18 +28,21 @@ namespace PowerUtils.AspNetCore.ErrorHandler.Validations.Tests.Utils
             problemDetails.Instance.Should()
                 .Be(instance);
 
-            problemDetails.TraceID.Should()
+            problemDetails.TraceId.Should()
                 .NotBeNullOrWhiteSpace();
         }
 
-        public static void ValidateContent(this ProblemDetailsResponse problemDetails, HttpStatusCode statusCode, string instance, Dictionary<string, string> expectedErrors)
+        public static void ValidateContent(this ErrorProblemDetails problemDetails, HttpStatusCode statusCode, string instance, Dictionary<string, ErrorDetails> expectedErrors)
         {
             problemDetails.ValidateContent(statusCode, instance);
 
-            foreach(var error in expectedErrors)
+            foreach(var error in problemDetails.Errors)
             {
-                problemDetails.Errors.Should()
-                    .Contain(error.Key, error.Value);
+                expectedErrors[error.Key].Code.Should()
+                    .Be(error.Value.Code);
+
+                expectedErrors[error.Key].Description.Should()
+                    .Be(error.Value.Description);
             }
 
             problemDetails.Errors.Should()
@@ -56,7 +58,7 @@ namespace PowerUtils.AspNetCore.ErrorHandler.Validations.Tests.Utils
 
         public static void ValidateContentTypeProblemJson(this HttpResponseMessage response)
             => response.Content.Headers.ContentType.MediaType.Should()
-                .Be(ExtendedMediaTypeNames.ProblemApplication.JSON);
+                .Be(ProblemDetailsDefaults.PROBLEM_MEDIA_TYPE_JSON);
 
         public static void ValidateContentTypeApplicationJson(this HttpResponseMessage response)
             => response.Content.Headers.ContentType.MediaType.Should()
