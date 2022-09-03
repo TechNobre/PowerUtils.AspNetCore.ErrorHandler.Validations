@@ -7,85 +7,86 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using PowerUtils.Text;
 
-namespace PowerUtils.AspNetCore.ErrorHandler.Validations.Tests.Utils;
-
-internal static class HttpClientUtils
+namespace PowerUtils.AspNetCore.ErrorHandler.Validations.Tests.Utils
 {
-    #region GETS
-    public static async Task<(HttpResponseMessage Response, TResponse Content)> SendGetAsync<TResponse>(this HttpClient client, string endpoint, object parameters = null)
+    internal static class HttpClientUtils
     {
-        if(parameters != null)
+        #region GETS
+        public static async Task<(HttpResponseMessage Response, TResponse Content)> SendGetAsync<TResponse>(this HttpClient client, string endpoint, object parameters = null)
         {
-            endpoint += parameters.ToQueryString();
-        }
-
-        var response = await client
-            .GetAsync(endpoint);
-
-        return (
-            response,
-            await response.DeserializeResponseAsync<TResponse>()
-        );
-    }
-    #endregion
-
-
-    #region POSTS
-    public static async Task<(HttpResponseMessage Response, TResponse Content)> SendPostAsync<TResponse>(this HttpClient client, string endpoint, object body = null)
-    {
-        var request = body.ToPostRequest(endpoint);
-
-        var response = await client
-            .SendAsync(request);
-
-        return (
-            response,
-            await response.DeserializeResponseAsync<TResponse>()
-        );
-    }
-
-    public static HttpRequestMessage ToPostRequest(this object body, string endpoint)
-    {
-        if(body == null)
-        {
-            return new HttpRequestMessage(HttpMethod.Post, endpoint)
+            if(parameters != null)
             {
-                Content = JsonContent.Create(null, typeof(object), new MediaTypeHeaderValue(MediaTypeNames.Application.Json), null)
-            };
-        }
+                endpoint += parameters.ToQueryString();
+            }
 
-        return new HttpRequestMessage(HttpMethod.Post, endpoint)
-        {
-            Content = JsonContent.Create(body)
-        };
-    }
-    #endregion
+            var response = await client
+                .GetAsync(endpoint);
 
-
-    #region AUX
-    public static async Task<TResponse> DeserializeResponseAsync<TResponse>(this HttpResponseMessage responseMessage)
-    {
-        var content = await responseMessage.Content.ReadAsStringAsync();
-
-        if(string.IsNullOrWhiteSpace(content))
-        {
-            return default;
-        }
-
-        try
-        {
-            return JsonSerializer.Deserialize<TResponse>(
-                content,
-                new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                }
+            return (
+                response,
+                await response.DeserializeResponseAsync<TResponse>()
             );
         }
-        catch(Exception exception)
+        #endregion
+
+
+        #region POSTS
+        public static async Task<(HttpResponseMessage Response, TResponse Content)> SendPostAsync<TResponse>(this HttpClient client, string endpoint, object body = null)
         {
-            throw new InvalidCastException($"Cannot deserialize the response to {typeof(ProblemDetailsResponse).FullName} Content -> {content}", exception);
+            var request = body.ToPostRequest(endpoint);
+
+            var response = await client
+                .SendAsync(request);
+
+            return (
+                response,
+                await response.DeserializeResponseAsync<TResponse>()
+            );
         }
+
+        public static HttpRequestMessage ToPostRequest(this object body, string endpoint)
+        {
+            if(body == null)
+            {
+                return new HttpRequestMessage(HttpMethod.Post, endpoint)
+                {
+                    Content = JsonContent.Create(null, typeof(object), new MediaTypeHeaderValue(MediaTypeNames.Application.Json), null)
+                };
+            }
+
+            return new HttpRequestMessage(HttpMethod.Post, endpoint)
+            {
+                Content = JsonContent.Create(body)
+            };
+        }
+        #endregion
+
+
+        #region AUX
+        public static async Task<TResponse> DeserializeResponseAsync<TResponse>(this HttpResponseMessage responseMessage)
+        {
+            var content = await responseMessage.Content.ReadAsStringAsync();
+
+            if(string.IsNullOrWhiteSpace(content))
+            {
+                return default;
+            }
+
+            try
+            {
+                return JsonSerializer.Deserialize<TResponse>(
+                    content,
+                    new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    }
+                );
+            }
+            catch(Exception exception)
+            {
+                throw new InvalidCastException($"Cannot deserialize the response to {typeof(ProblemDetailsResponse).FullName} Content -> {content}", exception);
+            }
+        }
+        #endregion
     }
-    #endregion
 }

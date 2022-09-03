@@ -2,54 +2,56 @@
 using System.Threading.Tasks;
 using PowerUtils.AspNetCore.ErrorHandler.Validations.Tests.Config;
 using PowerUtils.AspNetCore.ErrorHandler.Validations.Tests.Utils;
+using Xunit;
 
-namespace PowerUtils.AspNetCore.ErrorHandler.Validations.Tests.ControllersTests;
-
-[Collection(nameof(IntegrationApiTestsFixtureCollection))]
-public class TestsControllerTests
+namespace PowerUtils.AspNetCore.ErrorHandler.Validations.Tests.ControllersTests
 {
-    private readonly IntegrationTestsFixture _testsFixture;
-
-    public TestsControllerTests(IntegrationTestsFixture testsFixture)
-        => _testsFixture = testsFixture;
-
-
-    [Fact]
-    public async Task Validations_WithError_400()
+    [Collection(nameof(IntegrationApiTestsFixtureCollection))]
+    public class TestsControllerTests
     {
-        // Arrange
-        var requestUri = "/test/true";
+        private readonly IntegrationTestsFixture _testsFixture;
+
+        public TestsControllerTests(IntegrationTestsFixture testsFixture)
+            => _testsFixture = testsFixture;
 
 
-        // Act
-        (var response, var content) = await _testsFixture.Client.SendGetAsync<ProblemDetailsResponse>(requestUri);
+        [Fact]
+        public async Task WithError_Validate_400()
+        {
+            // Arrange
+            var requestUri = "/test/true";
 
 
-        // Assert
-        response.ValidateResponse(HttpStatusCode.BadRequest);
-        response.ValidateContentTypeProblemJson();
-        content.ValidateContent(
-            HttpStatusCode.BadRequest,
-            "GET: " + requestUri,
-            new()
-            {
-                { "demoProp", "DemoCode" }
-            }
-        );
-    }
-
-    [Fact]
-    public async Task Validations_WithoutError_200()
-    {
-        // Arrange
-        var requestUri = "/test/false";
+            // Act
+            (var response, var content) = await _testsFixture.Client.SendGetAsync<ProblemDetailsResponse>(requestUri);
 
 
-        // Act
-        (var response, var _) = await _testsFixture.Client.SendGetAsync<string>(requestUri);
+            // Assert
+            response.ValidateResponse(HttpStatusCode.BadRequest);
+            response.ValidateContentTypeProblemJson();
+            content.ValidateContent(
+                HttpStatusCode.BadRequest,
+                "GET: " + requestUri,
+                new()
+                {
+                    { "demoProp", "DemoCode" }
+                }
+            );
+        }
+
+        [Fact]
+        public async Task WithoutError_Validate_200()
+        {
+            // Arrange
+            var requestUri = "/test/false";
 
 
-        // Assert
-        response.ValidateResponse(HttpStatusCode.OK);
+            // Act
+            (var response, var _) = await _testsFixture.Client.SendGetAsync<string>(requestUri);
+
+
+            // Assert
+            response.ValidateResponse(HttpStatusCode.OK);
+        }
     }
 }

@@ -2,31 +2,32 @@
 using Microsoft.Extensions.DependencyInjection;
 using PowerUtils.AspNetCore.ErrorHandler.Validations.Samples.Services;
 
-namespace PowerUtils.AspNetCore.ErrorHandler.Validations.Samples;
-
-public class Startup
+namespace PowerUtils.AspNetCore.ErrorHandler.Validations.Samples
 {
-    public void ConfigureServices(IServiceCollection services)
+    public class Startup
     {
-        services.AddControllers();
-        services.AddSwaggerGen();
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddControllers();
+            services.AddSwaggerGen();
 
 
-        services.AddValidationNotifications();
-        services.AddErrorHandler();
+            services.AddValidationNotifications();
+            services.AddErrorHandler();
 
-        services.AddScoped<ITestService, TestService>();
-    }
+            services.AddScoped<ITestService, TestService>();
+        }
 
-    public void Configure(IApplicationBuilder app)
-    {
-        app.UseSwagger();
-        app.UseSwaggerUI();
+        public void Configure(IApplicationBuilder app)
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
-        app.UseRouting();
+            app.UseRouting();
 
-        app.UseEndpoints(endpoints
-            => endpoints.MapControllers() // Mapping all controller
-        );
+            app.UseEndpoints(endpoints
+                => endpoints.MapControllers() // Mapping all controller
+            );
+        }
     }
 }

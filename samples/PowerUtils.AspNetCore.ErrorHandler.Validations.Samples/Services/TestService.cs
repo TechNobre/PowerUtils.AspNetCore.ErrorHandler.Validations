@@ -1,28 +1,29 @@
 ﻿using PowerUtils.Validations;
 
-namespace PowerUtils.AspNetCore.ErrorHandler.Validations.Samples.Services;
-
-public interface ITestService
+namespace PowerUtils.AspNetCore.ErrorHandler.Validations.Samples.Services
 {
-    string GetResult(bool value);
-}
-
-
-public class TestService : ITestService
-{
-    private readonly IValidationNotifications _validations;
-
-    public TestService(IValidationNotifications validations)
-        => _validations = validations;
-
-    public string GetResult(bool value)
+    public interface ITestService
     {
-        if(value)
-        {
-            _validations.AddBadNotification("DemoProp", "DemoCode");
-            return default;
-        }
+        string GetResult(bool value);
+    }
 
-        return "true";
+
+    public class TestService : ITestService
+    {
+        private readonly IValidationNotifications _validations;
+
+        public TestService(IValidationNotifications validations)
+            => _validations = validations;
+
+        public string GetResult(bool value)
+        {
+            if(value)
+            {
+                _validations.AddBadNotification("DemoProp", "DemoCode");
+                return default;
+            }
+
+            return "true";
+        }
     }
 }

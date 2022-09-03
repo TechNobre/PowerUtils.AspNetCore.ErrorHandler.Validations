@@ -2,37 +2,36 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Mime;
-using Microsoft.AspNetCore.Mvc.Testing;
 using PowerUtils.AspNetCore.ErrorHandler.Validations.Samples;
+using Xunit;
 
-namespace PowerUtils.AspNetCore.ErrorHandler.Validations.Tests.Config;
-
-[CollectionDefinition(nameof(IntegrationApiTestsFixtureCollection))]
-public class IntegrationApiTestsFixtureCollection : ICollectionFixture<IntegrationTestsFixture> { }
-
-public class IntegrationTestsFixture : IDisposable
+namespace PowerUtils.AspNetCore.ErrorHandler.Validations.Tests.Config
 {
-    public HttpClient Client;
+    [CollectionDefinition(nameof(IntegrationApiTestsFixtureCollection))]
+    public class IntegrationApiTestsFixtureCollection : ICollectionFixture<IntegrationTestsFixture> { }
 
-    private readonly WebAPIFactory<Startup> _factory;
-
-    public IntegrationTestsFixture()
+    public class IntegrationTestsFixture : IDisposable
     {
-        var clientOptions = new WebApplicationFactoryClientOptions();
+        public HttpClient Client;
 
-        _factory = new WebAPIFactory<Startup>();
+        private readonly WebAPIFactory<Startup> _factory;
 
-        Client = _factory.CreateClient(clientOptions);
-        Client.DefaultRequestHeaders.Clear();
-        Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MediaTypeNames.Application.Json));
-    }
+        public IntegrationTestsFixture()
+        {
+            _factory = new WebAPIFactory<Startup>();
 
-    public void Dispose()
-    {
-        Client.Dispose();
+            Client = _factory.CreateClient();
+            Client.DefaultRequestHeaders.Clear();
+            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MediaTypeNames.Application.Json));
+        }
 
-        _factory.Dispose();
+        public void Dispose()
+        {
+            Client.Dispose();
 
-        GC.SuppressFinalize(this);
+            _factory.Dispose();
+
+            GC.SuppressFinalize(this);
+        }
     }
 }
