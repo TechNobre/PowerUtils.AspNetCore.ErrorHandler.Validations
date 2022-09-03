@@ -84,7 +84,7 @@ namespace PowerUtils.AspNetCore.ErrorHandler.Validations.Tests.Utils
             }
             catch(Exception exception)
             {
-                throw new InvalidCastException($"Cannot deserialize the response to {typeof(ProblemDetailsResponse).FullName} Content -> {content}", exception);
+                throw new InvalidCastException($"Cannot deserialize the response to {typeof(ErrorProblemDetails).FullName} Content -> {content}", exception);
             }
         }
         #endregion

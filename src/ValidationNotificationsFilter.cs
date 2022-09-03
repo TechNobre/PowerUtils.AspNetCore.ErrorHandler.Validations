@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
-using PowerUtils.Net.Constants;
 using PowerUtils.Validations;
 
 namespace PowerUtils.AspNetCore.ErrorHandler
@@ -10,15 +9,15 @@ namespace PowerUtils.AspNetCore.ErrorHandler
     public class ValidationNotificationsFilter : IAsyncResultFilter
     {
         private readonly IValidationNotifications _validations;
-        private readonly ProblemDetailsFactory _problemDetailsFactory;
+        private readonly IProblemFactory _factory;
 
         public ValidationNotificationsFilter(
             IValidationNotifications validations,
-            ProblemDetailsFactory problemDetailsFactory
+            IProblemFactory factory
         )
         {
             _validations = validations;
-            _problemDetailsFactory = problemDetailsFactory;
+            _factory = factory;
         }
 
         public async Task OnResultExecutionAsync(ResultExecutingContext context, ResultExecutionDelegate next)
@@ -26,15 +25,19 @@ namespace PowerUtils.AspNetCore.ErrorHandler
             if(_validations.Invalid)
             {
                 context.HttpContext.Response.StatusCode = (int)_validations.StatusCode;
-                context.HttpContext.Response.ContentType = ExtendedMediaTypeNames.ProblemApplication.JSON;
+                context.HttpContext.Response.ContentType = ProblemDetailsDefaults.PROBLEM_MEDIA_TYPE_JSON;
 
                 var errors = _validations.Notifications
                     .ToDictionary(
-                        key => key.Property,
-                        code => code.ErrorCode
+                        k => k.Property,
+                        v => new ErrorDetails
+                        {
+                            Code = v.ErrorCode,
+                            Description = "One or more validation errors occurred."
+                        }
                     );
 
-                var response = _problemDetailsFactory.Create(context.HttpContext, errors);
+                var response = _factory.CreateProblem(errors: errors);
 
                 await context.HttpContext.Response.WriteAsync(response);
 

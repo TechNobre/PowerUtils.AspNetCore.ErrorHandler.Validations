@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using PowerUtils.AspNetCore.ErrorHandler.Validations.Tests.Config;
 using PowerUtils.AspNetCore.ErrorHandler.Validations.Tests.Utils;
@@ -23,7 +24,7 @@ namespace PowerUtils.AspNetCore.ErrorHandler.Validations.Tests.ControllersTests
 
 
             // Act
-            (var response, var content) = await _testsFixture.Client.SendGetAsync<ProblemDetailsResponse>(requestUri);
+            (var response, var content) = await _testsFixture.Client.SendGetAsync<ErrorProblemDetails>(requestUri);
 
 
             // Assert
@@ -32,9 +33,9 @@ namespace PowerUtils.AspNetCore.ErrorHandler.Validations.Tests.ControllersTests
             content.ValidateContent(
                 HttpStatusCode.BadRequest,
                 "GET: " + requestUri,
-                new()
+                new Dictionary<string, ErrorDetails>()
                 {
-                    { "demoProp", "DemoCode" }
+                    ["demoProp"] = new("DemoCode", "One or more validation errors occurred.")
                 }
             );
         }
