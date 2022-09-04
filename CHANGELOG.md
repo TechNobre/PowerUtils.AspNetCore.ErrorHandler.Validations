@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/TechNobre/PowerUtils.AspNetCore.ErrorHandler.Validations/compare/v1.1.0...v1.1.1) (2022-09-04)
+
+
+### Bug Fixes
+
+* Error message ([b5cb7ba](https://github.com/TechNobre/PowerUtils.AspNetCore.ErrorHandler.Validations/commit/b5cb7ba2bcf6b0cce986b2795da38b24ffd0a30a))
+
 # [1.1.0](https://github.com/TechNobre/PowerUtils.AspNetCore.ErrorHandler.Validations/compare/v1.0.0...v1.1.0) (2022-09-03)
 
 
