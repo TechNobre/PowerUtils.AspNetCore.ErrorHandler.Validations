@@ -12,7 +12,7 @@
     <AssemblyName>PowerUtils.AspNetCore.ErrorHandler.Validations</AssemblyName>
     <RootNamespace>PowerUtils.AspNetCore.ErrorHandler</RootNamespace>
     
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
 
     <PackageOutputPath>bin\</PackageOutputPath>
   </PropertyGroup>
