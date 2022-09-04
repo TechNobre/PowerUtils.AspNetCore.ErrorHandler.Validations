@@ -35,7 +35,7 @@ namespace PowerUtils.AspNetCore.ErrorHandler.Validations.Tests.ControllersTests
                 "GET: " + requestUri,
                 new Dictionary<string, ErrorDetails>()
                 {
-                    ["demoProp"] = new("DemoCode", "One or more validation errors occurred.")
+                    ["demoProp"] = new("DemoCode", "One validation error occurred.")
                 }
             );
         }

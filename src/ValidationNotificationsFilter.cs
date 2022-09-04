@@ -33,7 +33,7 @@ namespace PowerUtils.AspNetCore.ErrorHandler
                         v => new ErrorDetails
                         {
                             Code = v.ErrorCode,
-                            Description = "One or more validation errors occurred."
+                            Description = "One validation error occurred."
                         }
                     );
 
