@@ -6,12 +6,12 @@
 
     <!-- Assembly and projecto details -->
     <!-- https://docs.microsoft.com/en-us/dotnet/standard/frameworks -->
-    <TargetFrameworks>net6.0;net5.0</TargetFrameworks>
+    <TargetFrameworks>net7.0;net6.0;net5.0</TargetFrameworks>
 
 
     <AssemblyName>PowerUtils.AspNetCore.ErrorHandler.Validations</AssemblyName>
     <RootNamespace>PowerUtils.AspNetCore.ErrorHandler</RootNamespace>
-    
+
     <Version>1.1.1</Version>
 
     <PackageOutputPath>bin\</PackageOutputPath>
