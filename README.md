@@ -24,7 +24,8 @@
 
 
 
-## Support to
+## Support to <a name="support-to"></a>
+- .NET 7.0
 - .NET 6.0
 - .NET 5.0
 
