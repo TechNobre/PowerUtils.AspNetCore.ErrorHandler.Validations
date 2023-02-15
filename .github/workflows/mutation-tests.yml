@@ -23,7 +23,7 @@ env:
   GIT_ORGANIZATION: 'TechNobre'
   PROJECT_NAME: 'PowerUtils.AspNetCore.ErrorHandler.Validations'
   PROJECT_FILE: 'PowerUtils.AspNetCore.ErrorHandler.Validations.csproj'
-  TEST_PROJECT_PATH: 'tests/PowerUtils.AspNetCore.ErrorHandler.Validations.Tests/PPowerUtils.AspNetCore.ErrorHandler.Validations.Tests.csproj'
+  TEST_PROJECT_PATH: 'tests/PowerUtils.AspNetCore.ErrorHandler.Validations.Tests/PowerUtils.AspNetCore.ErrorHandler.Validations.Tests.csproj'
 
 
 permissions:
