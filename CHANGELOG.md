@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/TechNobre/PowerUtils.AspNetCore.ErrorHandler.Validations/compare/v1.1.1...v2.0.0) (2024-03-02)
+
+
+### Bug Fixes
+
+* Marked all implementations as `Obsolete` ([8179aea](https://github.com/TechNobre/PowerUtils.AspNetCore.ErrorHandler.Validations/commit/8179aeaf889feedb823e2fd6d051748d781dbd47))
+
+
+### BREAKING CHANGES
+
+* Deprecated package
+
 ## [1.1.1](https://github.com/TechNobre/PowerUtils.AspNetCore.ErrorHandler.Validations/compare/v1.1.0...v1.1.1) (2022-09-04)
 
 
