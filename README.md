@@ -1,5 +1,9 @@
 # PowerUtils.AspNetCore.ErrorHandler.Validations
 
+# :warning: DEPRECATED
+
+This package has been discontinued because it never evolved, and the code present in this package does not justify its continuation. It is preferable to implement this code directly in the project if necessary.
+
 ![Logo](https://raw.githubusercontent.com/TechNobre/PowerUtils.AspNetCore.ErrorHandler.Validations/main/assets/logo/logo_128x128.png)
 
 ***Add middleware in AspNetCore pipeline to standardize validation responses***
@@ -17,14 +21,12 @@
 [![License: MIT](https://img.shields.io/github/license/TechNobre/PowerUtils.AspNetCore.ErrorHandler.Validations.svg)](https://github.com/TechNobre/PowerUtils.AspNetCore.ErrorHandler.Validations/blob/main/LICENSE)
 
 
-- [Support](#support-to)
-- [Dependencies](#dependencies)
-- [How to use](#how-to-use)
-  - [Install NuGet package](#Installation)
-  - [ValidationNotificationsMiddleware](#ValidationNotificationsMiddleware)
-- [Contribution](#contribution)
-- [License](./LICENSE)
-- [Changelog](./CHANGELOG.md)
+- [Support to ](#support-to-)
+- [Dependencies ](#dependencies-)
+- [How to use ](#how-to-use-)
+  - [Install NuGet package ](#install-nuget-package-)
+  - [Validation notifications middleware ](#validation-notifications-middleware-)
+- [Contribution ](#contribution-)
 
 
 
